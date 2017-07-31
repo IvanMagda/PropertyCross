@@ -1,36 +1,35 @@
 import React, { Component } from 'react'
 import ResultsList from '../components/ResultsList'
+import * as st from '../middleware/store'
 
 export default class Favorites extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [], route:'' };
+    this.state = { searchResult: [], route: '' };
   }
 
   componentDidMount() {
-    var local = [];
-    console.log(localStorage.getItem('favorites'));
-    localStorage.getItem('favorites').split('},{').forEach(function (e) {
-      console.log(JSON.parse(e));
-      local.push(JSON.parse(e));
-    });
-    this.setState({ data: local , route: this.props.route.path});
-    //console.log(JSON.parse(localStorage.getItem('favorites').split('},{')));
+    this.setState({ searchResult: st.Store('favorites') || [], route: this.props.route.path });
+    st.Store('searchResult', st.Store('favorites'));
     console.log(this.state.data);
-    console.log(local);
+    console.log(this.state.searchResult);
   }
 
   render() {
     let template;
 
-    template = (
-      <div className='container' ref='searchRes'>
-        <div className='row'>
-          <h3 className='col-md-12 text-center'>20 of 50 matches</h3>
+    if (this.state.searchResult.length > 0) {
+      template = (
+        <div className='container' ref='searchRes'>
+          <div className='row'>
+            <h3 className='col-md-12 text-center'> </h3>
+          </div>
+          <ResultsList data={this.state} />
         </div>
-        <ResultsList data={this.state} />
-      </div>
-    )
+      )
+    } else {
+      template = <h2>No Favorites</h2>
+    }
 
     return template;
   }

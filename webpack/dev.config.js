@@ -39,6 +39,7 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
+      $: 'jquery'
     }),
   ],
 };

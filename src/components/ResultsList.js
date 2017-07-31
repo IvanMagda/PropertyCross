@@ -8,7 +8,7 @@ export default class ResultsList extends Component {
     }
 
     render() {
-        var itemTemplate = this.props.data.data.map(function (item, index) {
+        var itemTemplate = this.props.data.searchResult.map(function (item, index) {
             return (
                 <Media key={index} >
                     <Media.Left>
@@ -24,7 +24,7 @@ export default class ResultsList extends Component {
 
         return (
             <div className='row'>
-                <div className='col-md-6 col-sm-offset-3'>
+                <div className='col-md-6 col-md-offset-3'>
                     {itemTemplate}
                 </div>
             </div>

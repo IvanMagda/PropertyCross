@@ -10,12 +10,14 @@ import PropertyListing from './components/PropertyListing'
 import LastSearch from './components/LastSearch'
 import Locations from './components/Locations'
 import NotFound from './components/NotFound'
+import ErrMessage from './components/ErrMessage'
 
 export const routes = (
   <div>
     <Route path='/' component={App}>
       <IndexRoute component={LastSearch} />
       <Route path='locations' component={Locations} />
+      <Route path='error' component={ErrMessage} />
     </Route>
     <Route path='/search' component={Search}>
       <IndexRoute component={ResultsList} />

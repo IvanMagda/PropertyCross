@@ -2,6 +2,7 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const postcssImport = require('postcss-import');
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 
 const development = require('./dev.config.js');
 const production = require('./prod.config.js');
@@ -20,6 +21,8 @@ process.env.BABEL_ENV = TARGET;
 const common = {
   entry: [
     PATHS.app,
+    'jquery', //will load jquery from node_modules
+    './src/index',
   ],
 
   output: {
@@ -75,6 +78,17 @@ const common = {
       loader: 'file?name=[name].[ext]',
     }],
   },
+
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: 'jquery',
+      "window.jQuery": 'jquery',
+      tether: 'tether',
+      Tether: 'tether',
+      'window.Tether': 'tether',
+    })
+  ],
 
   postcss: (webpack) => {
     return [

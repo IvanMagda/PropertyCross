@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node bin/server.js"
+    "start": "node bin/server.js",
+    "build": "NODE_ENV=production webpack --progress --verbose --display-error-details --config webpack/common.config.js"
   },
   "author": "Ivan Magda",
   "license": "MIT",
